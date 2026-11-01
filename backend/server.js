@@ -17,7 +17,7 @@ app.post("/api/register", async(req, res) => {
         
         const hashedPassword = await bcrypt.hash(password, 10) 
         await db.query("INSERT INTO users (name, email, password) VALUES (?,?,?)", [name, email, hashedPassword])
-
+        
         res.json({message: "Sikeres regisztráció!"})
     } catch (error) {
         console.log(error)
@@ -61,6 +61,22 @@ app.post("/api/login", async (req, res) => {
     }
 })
 
+
+app.post("/api/products", async (req, res) => {
+    try {
+        const {name,description,price} = req.body
+        const [products] = await db.query("SELECT id FROM products WHERE name = ?", [name])
+
+        if(products.length > 0) return res.status(400).json({message:"Ez a tárgy már létezik!"})
+
+        await db.query("INSERT INTO products (name,description,price) VALUES (?,?,?)", [name,description,price])
+
+        res.json({message:"Elem sikeresen feltöltve!"})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message:"Szerverhiba!"})
+    }
+})
 app.listen(PORT, () => {
     console.log(`Szerver ezen a porton fut: ${PORT}`)
 })
