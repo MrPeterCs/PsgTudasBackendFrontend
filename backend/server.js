@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const app = express()
 
-const PORT = 3000
+const PORT = 3977
 app.use(cors())
 app.use(express.json())
 
@@ -78,5 +78,6 @@ app.post("/api/products", async (req, res) => {
     }
 })
 app.listen(PORT, () => {
+    console.log(`A szerver hozzáférési útvonala: http://localhost:3977`)
     console.log(`Szerver ezen a porton fut: ${PORT}`)
 })
