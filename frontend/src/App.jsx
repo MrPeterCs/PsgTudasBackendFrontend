@@ -6,7 +6,8 @@ import Login from './Login'
 import Register from './Register'
 import GuestNavbar from './GuestNavbar'
 import UserNavbar from './UserNavbar'
-import Products from './Products';
+import ProductUpL from './ProductUpL';
+import Products from './Products'
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -28,7 +29,8 @@ function App() {
         <Route path="/login" element={ user ? <Navigate to="/profile" replace /> : <Login setUserLogin={setUser} />}/>
         <Route path="/register" element={ user ? <Navigate to="/profile" replace /> : <Register />}/>
         <Route path="*" element={<Navigate to="/" replace />}/>
-        <Route path="/Products" element={<Products />} />
+        <Route path="/Products" element={<Products/>} />
+        <Route path="/ProductUpL" element={<ProductUpL />} />
       </Routes>
     </BrowserRouter>
   )

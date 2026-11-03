@@ -17,7 +17,8 @@ export default function UserNavbar({ logout }) {
             <Container>
                 <Nav className="me-auto flex-row gap-4">
                 <Nav.Link as={Link} to="/profile">Profilom</Nav.Link>
-                <Nav.Link as={Link} to="/products">Product hozzáadása</Nav.Link>
+                <Nav.Link as={Link} to="/ProductUpL">Product hozzáadása</Nav.Link>
+                <Nav.Link as={Link} to="/products">Productok megtekintése</Nav.Link>
                 </Nav>
                 <button onClick={handleLogout}>Kijelentkezés</button>
             </Container>

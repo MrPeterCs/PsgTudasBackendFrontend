@@ -62,7 +62,7 @@ app.post("/api/login", async (req, res) => {
 })
 
 
-app.post("/api/products", async (req, res) => {
+app.post("/api/productupl", async (req, res) => {
     try {
         const {name,description,price} = req.body
         const [products] = await db.query("SELECT id FROM products WHERE name = ?", [name])
@@ -72,6 +72,16 @@ app.post("/api/products", async (req, res) => {
         await db.query("INSERT INTO products (name,description,price) VALUES (?,?,?)", [name,description,price])
 
         res.json({message:"Elem sikeresen feltöltve!"})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message:"Szerverhiba!"})
+    }
+})
+
+app.get("/api/products", async (req, res) => {
+    try {
+        const [products] = await db.query("SELECT * FROM products")
+        res.json(products)
     } catch (error) {
         console.log(error)
         res.status(500).json({message:"Szerverhiba!"})

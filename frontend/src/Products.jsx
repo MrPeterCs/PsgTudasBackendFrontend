@@ -1,33 +1,18 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 
-export default function Products()
+export default function Product()
 {
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
-    const [price, setPrice] = useState("")
+    const [products, setProducts] = useState([])
     const [error, setError] = useState("")
 
-    const navigate = useNavigate()
-
-    async function produpload(e){
-        e.preventDefault()
-        setError("")
-
+    async function loadProducts(){
         try {
-            const response = await fetch("http://localhost:3977/api/products",{
-                method: "POST",
-                headers: { "Content-Type" : "application/json"},
-                body: JSON.stringify({name, description, price})
-            })
+            const response = await fetch("http://localhost:3977/api/products")
 
             const data = await response.json()
 
             if(response.ok){
-                alert(data.message)
-                setName("")
-                setDescription("")
-                setPrice("")
+                setProducts(data)
             }else{
                 setError(data.message)
             }
@@ -36,17 +21,36 @@ export default function Products()
         }
     }
 
-    return (
-        <form onSubmit={produpload}>
-            <h2>Regisztráció</h2>
+    useEffect(() => {
+        loadProducts()
+    }, [])
 
-            <input type="text" placeholder="Termék neve" value={name} onChange={(e) => setName(e.target.value)} required/>
-            <input type="text" placeholder="Termék leírása" value={description} onChange={(e) => setDescription(e.target.value)} required/>
-            <input type="number" placeholder="Ára" value={price} onChange={(e) => setPrice(e.target.value)} required/>
+    return (
+        <div className="text-center mt-4">
+            <h2>Termékek</h2>
 
             {error && <p style={{color: "red"}}>{error}</p>}
-            
-            <button type="submit">Feltöltés</button>
-        </form>
+
+            <table className="table table-bordered w-auto mx-auto" border="1">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Név</th>
+                        <th>Leírás</th>
+                        <th>Ár</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {products.map((product) => (
+                        <tr key={product.id}>
+                            <td>{product.id}</td>
+                            <td>{product.name}</td>
+                            <td>{product.description}</td>
+                            <td>{product.price}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     )
 }
