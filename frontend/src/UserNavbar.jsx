@@ -10,8 +10,11 @@ export default function UserNavbar({logout})
         navigate("/")
     }
     return(
-        <nav>
-            <button onClick={handleLogout}>Kijelentkezés</button>
-        </nav>
+    <>
+    
+        <button onClick={handleLogout}>Kijelentkezés</button>
+    </>
+
+        
     )
 }

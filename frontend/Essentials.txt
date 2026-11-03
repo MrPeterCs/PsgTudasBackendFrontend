@@ -1,0 +1,9 @@
+#Control + ö a terminálhoz
+'npm install' #Ezzel töltöd le ami kell majd a futtatáshoz
+'npm run dev' #Ezzel futtatod
+#Le állítás pedig Control+C
+
+#Ha nincsen még semmid akkor menj be mappádba hogy lesz a backend és a frontend.
+#terminállal lépsz be, terminálban előre lépni 'cd frontend-el' lehet, vissza egyet pedig 'cd ..'
+#a frontend létre hozásához pedig 'npm create vite@latest frontend -- --template react'
+#utánna futtani pedig 'npm run dev'
