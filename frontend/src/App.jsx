@@ -28,9 +28,9 @@ function App() {
         <Route path="/profile" element={ user ? <h1>Üdvözöllek, {user.name}</h1> : <Navigate to="/login" replace />}/>
         <Route path="/login" element={ user ? <Navigate to="/profile" replace /> : <Login setUserLogin={setUser} />}/>
         <Route path="/register" element={ user ? <Navigate to="/profile" replace /> : <Register />}/>
+        <Route path="/Products" element={ user ? <Products/> :<Navigate to="/profile" replace /> } />
+        <Route path="/ProductUpL" element={ user ? <ProductUpL />:<Navigate to="/profile" replace /> } />
         <Route path="*" element={<Navigate to="/" replace />}/>
-        <Route path="/Products" element={<Products/>} />
-        <Route path="/ProductUpL" element={<ProductUpL />} />
       </Routes>
     </BrowserRouter>
   )
